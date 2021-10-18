@@ -1,0 +1,22 @@
+body{
+  background:lightgray
+}
+
+#Grid {
+  margin:auto; 
+  border:solid 3px black; 
+  border-radius: 15px;
+  display:flex;
+  align-content:center; 
+  justify-content: center;
+  flex-wrap:wrap;background-color: lightskyblue;
+  height: 600px;
+  width: 700px;
+  }
+
+  #title{
+    font-family: 'Abril Fatface', cursive; 
+    font-size: xx-large;
+    text-align: center;
+    margin: 20px;
+  }
