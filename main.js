@@ -15,8 +15,6 @@ let gameArray = [
 
 let isWinner, currentPlayer, gameSquare
 
-
-
 /*--------- Cached Element References ---------*/
 
 const gameGrid = document.querySelector("#Grid")
@@ -24,10 +22,12 @@ const gameGrid = document.querySelector("#Grid")
 const messageEl = document.querySelector("#message")
 
 
-
 /*-------------- Event Listeners --------------*/
 
+
 //resetBtn.addEventListener('click', initializeBoard)
+
+
 
 /*----------------- Functions -----------------*/
 
@@ -50,16 +50,20 @@ function initializeBoard() {
   currentPlayer = 1
 }
 
+//including in the function if the innerArray index is equal to 0 that player can click on the square 
 function playGame() {
   console.log(this.value)
-  if (currentPlayer === 1) {
+  if (currentPlayer === 1 && this.value === 0) {
     this.style.background = "red";
+    this.value = null
     togglePlayer();
-  } else {
+  } else if (currentPlayer === -1 && this.value === 0) {
     this.style.background = "yellow";
+    this.value = null 
     togglePlayer();
   }
 }
+
 
 //helper function to toggle the players turns 
 function togglePlayer() {
