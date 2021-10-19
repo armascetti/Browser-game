@@ -20,3 +20,10 @@ h2 {
   height: 600px;
   width: 700px;
   } 
+
+  .square {
+   width: 100px;
+   height: 100px;
+   background: white;
+   border-radius: 80px;
+  }
