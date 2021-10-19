@@ -1,8 +1,13 @@
 /*----------------- Constants -----------------*/
 
-
-
-
+gameArray = [
+  [null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null],
+  [0, 0, 0, 0, 0, 0, 0]
+]
 
 /*------------- Variables (state) -------------*/
 
@@ -24,7 +29,7 @@ const messageEl = document.querySelector("#message")
 
 /*----------------- Functions -----------------*/
 function initializeBoard() {
-  for (let index = 0; index < 42; index++) {
+  for (let index = 0; index < 42; index++){
     let gameSquare = document.createElement("div");
     gameSquare.addEventListener('click', playGame)
     gameSquare.style.width = "100px";
@@ -35,8 +40,6 @@ function initializeBoard() {
   }
   currentPlayer = 1
 }
-
-
 
 function playGame() {
   if (currentPlayer === 1) {
