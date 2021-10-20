@@ -106,15 +106,11 @@ const lightDarkBtn = document.querySelector("#light-dark-button")
 
 /*----------------- Functions -----------------*/
 
-//use a for loop to create smaller divs inside a large div
-//use another for loop to access the innerArray index 
-// created a div, event listener, and gave it a className all in the function 
-//access the gameArray index and grabbing the nested arrays that inside the gameAray. setting the value of each div thats in the innerArray of the gameArray 
-//create and appending to the gameGrid 
+
 function initializeBoard() {
   for (let innerArray = 0; innerArray < 42; innerArray++) {
     let gameSquare = document.createElement("div");
-    gameSquare.addEventListener('click', whosTurn)
+    gameSquare.addEventListener('click', currentMove)
     gameSquare.className = "square"
     gameSquare.value = gameArray[innerArray]
     gameGrid.appendChild(gameSquare)
@@ -123,12 +119,11 @@ function initializeBoard() {
 }
 
 
-//including in the function if the innerArray index is equal to 0 that player can click on the square 
-function whosTurn() {
+function currentMove() {
   const currentGameBoardState = Array.from(document.getElementsByClassName("square")) //getting the exact current game play state. 
   const currentSquare = this
   if (currentPlayer === 1 && currentSquare.value === 0) {
-    currentMoveLogic(currentSquare, "red", currentGameBoardState)  //call the function, pass in the current div that is clicked, pass in the color of player, & 
+    currentMoveLogic(currentSquare, "red", currentGameBoardState)  //call the function, pass in the current div that is clicked, pass in the color of player, & current game state
   } else if (currentPlayer === -1 && currentSquare.value === 0) {
     currentMoveLogic(currentSquare, "yellow", currentGameBoardState)
   }
@@ -142,8 +137,8 @@ function currentMoveLogic(currentSquare, playerColor, currentGameBoardState) {
   unlockNewSquare(currentGameBoardState)
   setValidMove(currentSquare, "")
   togglePlayer()
+  checkForWinner()
 }
-
 
 //helper functions
 function togglePlayer() {
@@ -177,32 +172,28 @@ function unlockNewSquare(currentGameBoardState) {
 
 
 function renderBoard() {
-  let getDOM = document.getElementsByClassName("square")
-  for (let i = 0; i < getDOM.length; i++) {
-    getDOM[i].value = gameArray[i]
+  let getGrid = document.getElementsByClassName("square")
+  for (let i = 0; i < getGrid.length; i++) {
+    getGrid[i].value = gameArray[i]
   }
-  console.log(getDOM)
 }
 
 
 //winning logic 
-function checkEachComboForWin(combo, currentGameBoardState) {
+//if the current gameboard state has a 1 or -1 at any of the combos we have a winner!
+function checkForWinner(currentGameBoardState) {
   let counterPlayTwo = 0;
   let counterPlayOne = 0;
   for (let i = 0; i < winningCombos.length; i++) {
-    for (let index = 0; index < combo.length; index++) {
-      const element = combo[index];
-      //if the current gameboard state has a 1 or -1 at any of the combos we have a winner!
-      if (currentGameBoardState[element].value === -1) {
-        counterPlayTwo++;
-      } else if (currentGameBoardState[element].value === 1) {
-        counterPlayOne++;
-      }
+    const element = winningCombos[i];
+    if (currentGameBoardState[element].value === -1) {
+      counterPlayTwo++;
+    } else if (currentGameBoardState[element].value === 1) {
+      counterPlayOne++;
     }
   }
   displayWinner(counterPlayOne, counterPlayTwo)
 }
-
 
 
 function displayWinner(counterPlayOne, counterPlayTwo) {
