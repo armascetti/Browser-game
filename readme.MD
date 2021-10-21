@@ -14,6 +14,12 @@
   # Add-ons 
 
   
-![Light Mode:](./images/light mode.PNG)
+![Light Mode](images/light mode.PNG)
 
-![Dark Mode:](./images/dark mode.PNG)
+![Dark Mode](images/dark mode.PNG)
+
+# Next Steps 
+
+* Play against a computer 
+* More mobile friendly
+* Add more unique styling to the game 
