@@ -104,24 +104,6 @@ lightDarkBtn.addEventListener("click", toggleLightDark)
 
 /*----------------- Functions -----------------*/
 
-function resetBoard() {
-  for (let i = 0; i < gameArray.length; i++) {
-    if (i > 0 && i < 35) {
-      gameArray[i] = null
-    } else if (i > 34) {
-      gameArray[i] = 0
-    }
-  }
-  renderBoardValues()
-  resetColorsOnBoard()
-  messageEl.innerText = "Click the Circles. Four in a Row WINS!"
-}
-
-function resetColorsOnBoard() {
-  const currentGameBoardState = Array.from(document.getElementsByClassName("square"))
-  currentGameBoardState.forEach(element => element.style.background = "white");
-}
-
 function initializeBoard() {
   for (let innerArray = 0; innerArray < 42; innerArray++) {
     let gameSquare = document.createElement("div");
@@ -131,6 +113,14 @@ function initializeBoard() {
     gameGrid.appendChild(gameSquare)
   }
   currentPlayer = 1
+}
+
+
+function renderBoardValues() {
+  const currentGameBoardState = Array.from(document.getElementsByClassName("square"))
+  for (let i = 0; i < currentGameBoardState.length; i++) {
+    currentGameBoardState[i].value = gameArray[i]
+  }
 }
 
 
@@ -168,14 +158,6 @@ function unlockNewSquare(currentGameBoardState) {
 }
 
 
-function renderBoardValues() {
-  const currentGameBoardState = Array.from(document.getElementsByClassName("square"))
-  for (let i = 0; i < currentGameBoardState.length; i++) {
-    currentGameBoardState[i].value = gameArray[i]
-  }
-}
-
-
 function checkForWinner() {
   for (let i = 0; i < winningCombos.length; i++) {
     const currentWinCombo = winningCombos[i]
@@ -187,7 +169,6 @@ function checkForWinner() {
 function checkWinningCombo(combo) {
   let counterPlayerOne = 0
   let counterPlayerTwo = 0
-
   for (let i = 0; i < combo.length; i++) {
     if (gameArray[combo[i]] === 1) {
       counterPlayerOne++
@@ -201,10 +182,8 @@ function checkWinningCombo(combo) {
 
 function displayWinner(counterPlayerOne, counterPlayerTwo) {
   if (counterPlayerOne === 4) {
-    alert("WINNER")
     messageEl.innerText = `Player One Wins!`
   } else if (counterPlayerTwo === 4) {
-    alert("WINNER")
     messageEl.innerText = `Player two Wins!`
   } else {
     return;
@@ -212,10 +191,40 @@ function displayWinner(counterPlayerOne, counterPlayerTwo) {
 }
 
 
-// function toggleLightDark(){
+function toggleLightDark() {
+  body.className = body.className === "dark" ? "" : "dark"
+}
 
-// }
+
+function checkDarkPref(){
+if (
+  window.matchMedia("(prefers-color-scheme:dark)").matches &&
+  body.className !== "dark"
+) {
+  toggleLightDark()
+}
+}
+
+
+function resetBoard() {
+  for (let i = 0; i < gameArray.length; i++) {
+    if (i > 0 && i < 35) {
+      gameArray[i] = null
+    } else if (i > 34) {
+      gameArray[i] = 0
+    }
+  }
+  renderBoardValues()
+  resetColorsOnBoard()
+  messageEl.innerText = "Click the Circles. Four in a Row WINS!"
+}
+
+function resetColorsOnBoard() {
+  const currentGameBoardState = Array.from(document.getElementsByClassName("square"))
+  currentGameBoardState.forEach(element => element.style.background = "white");
+}
 
 initializeBoard()
 renderBoardValues()
+checkDarkPref()
 

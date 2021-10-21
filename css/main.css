@@ -1,3 +1,13 @@
+/* The Universal Selector */
+*, /* All elements*/
+*::before, /* All ::before pseudo-elements */
+*::after { /* All ::after pseudo-elements */
+  /* height & width will now include border & padding by default
+     but can be over-ridden as needed */
+  box-sizing: inherit;
+}
+
+
 body{
   background-color:lavenderblush;
   display: flex;
@@ -9,14 +19,14 @@ body{
 
 h2 {
   font-family: 'Abril Fatface', cursive; 
-  font-size: xx-large;
+  font-size: x-large;
   text-align: center;
   margin: 20px;
 }
 
 h3{
   font-family: 'Abril Fatface', cursive; 
-  font-size: xx-large;
+  font-size: x-large;
   text-align: center;
   margin: 20px;
 }
@@ -37,7 +47,13 @@ h3{
    width: 100px;
    height: 100px;
    background: white;
-   border-radius: 80px;
+   border-radius: 95px;
   }
+  
 
- 
+  @media only screen and (min-width: 768px) {
+    .card{
+      width: 325px;
+      margin: 30px 15px 0;
+    }
+  }
