@@ -104,11 +104,11 @@ resetBtn.addEventListener('click', resetBoard)
 /*----------------- Functions -----------------*/
 
 function initializeBoard() {
-  for (let innerArray = 0; innerArray < 42; innerArray++) {
+  for (let i = 0; i < 42; i++) {
     let gameSquare = document.createElement("div");
     gameSquare.addEventListener('click', currentMove)
     gameSquare.className = "square"
-    gameSquare.value = gameArray[innerArray]
+    gameSquare.value = gameArray[i]
     gameGrid.appendChild(gameSquare)
   }
   currentPlayer = 1
@@ -213,5 +213,5 @@ function toggleLightMode() {
 
 initializeBoard()
 renderBoardValues()
-checkDarkPref()
+
 
