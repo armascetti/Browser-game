@@ -9,7 +9,8 @@ let gameArray = [
   0, 0, 0, 0, 0, 0, 0
 ]
 
-const winningCombos = [
+
+let winningCombos = [
   [0, 1, 2, 3],
   [41, 40, 39, 38],
   [7, 8, 9, 10],
@@ -78,10 +79,8 @@ const winningCombos = [
   [10, 17, 24, 31],
   [11, 18, 25, 32],
   [12, 19, 26, 33],
-  [13, 20, 27, 34],
+  [13, 20, 27, 34]
 ]
-
-
 
 /*------------- Variables (state) -------------*/
 
@@ -92,20 +91,36 @@ let isWinner, currentPlayer, gameSquare
 /*--------- Cached Element References ---------*/
 
 const gameGrid = document.querySelector("#Grid")
-const resetBtn = document.querySelector("#resetbutton")
+const resetBtn = document.querySelector("#resetButton")
 const messageEl = document.querySelector("#message")
 const lightDarkBtn = document.querySelector("#light-dark-button")
-
 
 /*-------------- Event Listeners --------------*/
 
 
-//resetBtn.addEventListener('click', initializeBoard)
-//lightDarkBtn.addEventListener("click", toggleLightDark)
+resetBtn.addEventListener('click', resetBoard)
+lightDarkBtn.addEventListener("click", toggleLightDark)
 
 
 /*----------------- Functions -----------------*/
 
+function resetBoard() {
+  for (let i = 0; i < gameArray.length; i++) {
+    if (i > 0 && i < 35) {
+      gameArray[i] = null
+    } else if (i > 34) {
+      gameArray[i] = 0
+    }
+  }
+  renderBoardValues()
+  resetColorsOnBoard()
+  messageEl.innerText = "Click the Circles. Four in a Row WINS!"
+}
+
+function resetColorsOnBoard() {
+  const currentGameBoardState = Array.from(document.getElementsByClassName("square"))
+  currentGameBoardState.forEach(element => element.style.background = "white");
+}
 
 function initializeBoard() {
   for (let innerArray = 0; innerArray < 42; innerArray++) {
@@ -120,92 +135,87 @@ function initializeBoard() {
 
 
 function currentMove() {
-  const currentGameBoardState = Array.from(document.getElementsByClassName("square")) //getting the exact current game play state. 
-  const currentSquare = this
-  if (currentPlayer === 1 && currentSquare.value === 0) {
-    currentMoveLogic(currentSquare, "red", currentGameBoardState)  //call the function, pass in the current div that is clicked, pass in the color of player, & current game state
-  } else if (currentPlayer === -1 && currentSquare.value === 0) {
-    currentMoveLogic(currentSquare, "yellow", currentGameBoardState)
+  const currentGameBoardState = Array.from(document.getElementsByClassName("square"))
+  this.id = 'validMoveFlag'
+  if (currentPlayer === 1 && this.value === 0) {
+    this.style.background = "red"
+    unlockNewSquare(currentGameBoardState)
+    checkForWinner(currentGameBoardState)
+    togglePlayer()
+  } else if (currentPlayer === -1 && this.value === 0) {
+    this.style.background = "yellow"
+    unlockNewSquare(currentGameBoardState)
+    checkForWinner(currentGameBoardState)
+    togglePlayer()
   }
-}//onclick of each square 
-
-//if you ever do it more than once can create a function for it. 
-function currentMoveLogic(currentSquare, playerColor, currentGameBoardState) {
-  setValidMove(currentSquare, "validMove")
-  toggleColor(currentSquare, playerColor)
-  setPlayerValue(currentSquare, currentPlayer)
-  unlockNewSquare(currentGameBoardState)
-  setValidMove(currentSquare, "")
-  togglePlayer()
-  checkForWinner()
+  this.removeAttribute('id');
 }
 
-//helper functions
+
 function togglePlayer() {
   currentPlayer = currentPlayer * -1
 }
 
-function setPlayerValue(square, currentPlayer) {
-  square.value = currentPlayer
-}
 
-
-function setValidMove(square, value) {
-  square.innerText = value
-}
-
-function toggleColor(square, color) {
-  square.style.background = color
-}
-
-
-//unlock the squares on the board
 function unlockNewSquare(currentGameBoardState) {
   for (let i = 7; i < currentGameBoardState.length; i++) {
-    if (currentGameBoardState[i].innerText === "validMove") {
-      gameArray[i - 7] = 0;
+    if (currentGameBoardState[i].id === 'validMoveFlag') {
+      gameArray[i - 7] = 0
+      gameArray[i] = currentPlayer
     }
   }
-  //create a function that will iterate through the array keys and set them to each value on the current board
-  renderBoard()
+  renderBoardValues(currentGameBoardState)
 }
 
 
-function renderBoard() {
-  let getGrid = document.getElementsByClassName("square")
-  for (let i = 0; i < getGrid.length; i++) {
-    getGrid[i].value = gameArray[i]
+function renderBoardValues() {
+  const currentGameBoardState = Array.from(document.getElementsByClassName("square"))
+  for (let i = 0; i < currentGameBoardState.length; i++) {
+    currentGameBoardState[i].value = gameArray[i]
   }
 }
 
 
-//winning logic 
-//if the current gameboard state has a 1 or -1 at any of the combos we have a winner!
-function checkForWinner(currentGameBoardState) {
-  let counterPlayTwo = 0;
-  let counterPlayOne = 0;
+function checkForWinner() {
   for (let i = 0; i < winningCombos.length; i++) {
-    const element = winningCombos[i];
-    if (currentGameBoardState[element].value === -1) {
-      counterPlayTwo++;
-    } else if (currentGameBoardState[element].value === 1) {
-      counterPlayOne++;
-    }
+    const currentWinCombo = winningCombos[i]
+    checkWinningCombo(currentWinCombo)
   }
-  displayWinner(counterPlayOne, counterPlayTwo)
 }
 
 
-function displayWinner(counterPlayOne, counterPlayTwo) {
-  if (counterPlayOne === 4) {
+function checkWinningCombo(combo) {
+  let counterPlayerOne = 0
+  let counterPlayerTwo = 0
+
+  for (let i = 0; i < combo.length; i++) {
+    if (gameArray[combo[i]] === 1) {
+      counterPlayerOne++
+    } else if (gameArray[combo[i]] === -1) {
+      counterPlayerTwo++
+    }
+  }
+  displayWinner(counterPlayerOne, counterPlayerTwo)
+}
+
+
+function displayWinner(counterPlayerOne, counterPlayerTwo) {
+  if (counterPlayerOne === 4) {
+    alert("WINNER")
     messageEl.innerText = `Player One Wins!`
-  } else if (counterPlayTwo === 4) {
+  } else if (counterPlayerTwo === 4) {
+    alert("WINNER")
     messageEl.innerText = `Player two Wins!`
   } else {
     return;
   }
 }
 
-initializeBoard();
 
+// function toggleLightDark(){
+
+// }
+
+initializeBoard()
+renderBoardValues()
 
