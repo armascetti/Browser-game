@@ -50,7 +50,50 @@ h3{
    border-radius: 95px;
   }
   
+  #dark-mode {
+    background-color: salmon;
+    height: 40px;
+    width: 80px;
+    border-radius: 20%;
+  }
 
+  #resetButton {
+    background-color: salmon;
+    height: 40px;
+    width: 80px;
+    border-radius: 20%;
+  }
+
+
+
+  .dark-mode {
+    background-color: rgb(26, 26, 27);
+    color: rgb(109, 163, 150);
+  }
+
+  .dark-mode #Grid {
+    background-color: rgb(12, 3, 20);
+  }
+
+  .dark-mode .square {
+    background-color: rgb(22, 117, 85);
+  }
+
+  .dark-mode #resetButton {
+    background-color:black;
+    color: white;
+    height: 40px;
+    width: 80px;
+    border-radius: 20%;
+  }
+
+  .dark-mode #dark-mode  {
+    background-color: black;
+    color: white;
+    height: 40px;
+    width: 80px;
+    border-radius: 20%;
+  }
   @media only screen and (min-width: 768px) {
     .card{
       width: 325px;

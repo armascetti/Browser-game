@@ -93,13 +93,12 @@ let isWinner, currentPlayer, gameSquare
 const gameGrid = document.querySelector("#Grid")
 const resetBtn = document.querySelector("#resetButton")
 const messageEl = document.querySelector("#message")
-const lightDarkBtn = document.querySelector("#light-dark-button")
+
 
 /*-------------- Event Listeners --------------*/
 
 
 resetBtn.addEventListener('click', resetBoard)
-lightDarkBtn.addEventListener("click", toggleLightDark)
 
 
 /*----------------- Functions -----------------*/
@@ -191,20 +190,6 @@ function displayWinner(counterPlayerOne, counterPlayerTwo) {
 }
 
 
-function toggleLightDark() {
-  body.className = body.className === "dark" ? "" : "dark"
-}
-
-
-function checkDarkPref(){
-if (
-  window.matchMedia("(prefers-color-scheme:dark)").matches &&
-  body.className !== "dark"
-) {
-  toggleLightDark()
-}
-}
-
 
 function resetBoard() {
   for (let i = 0; i < gameArray.length; i++) {
@@ -222,6 +207,11 @@ function resetBoard() {
 function resetColorsOnBoard() {
   const currentGameBoardState = Array.from(document.getElementsByClassName("square"))
   currentGameBoardState.forEach(element => element.style.background = "white");
+}
+
+function toggleLightMode() {
+  let element = document.body;
+  element.classList.toggle("dark-mode");
 }
 
 initializeBoard()
