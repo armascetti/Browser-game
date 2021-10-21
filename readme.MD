@@ -14,7 +14,6 @@
   # Add-ons 
 
   
-![Light Mode:](https://imgur.com/JLW33kG)
+![Light Mode:](images/light mode.PNG)
 
-
-  Dark Mode: 
+![Dark Mode:](images/dark mode.PNG)
