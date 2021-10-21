@@ -164,7 +164,6 @@ function checkForWinner() {
   }
 }
 
-
 function checkWinningCombo(combo) {
   let counterPlayerOne = 0
   let counterPlayerTwo = 0
@@ -185,11 +184,9 @@ function displayWinner(counterPlayerOne, counterPlayerTwo) {
   } else if (counterPlayerTwo === 4) {
     messageEl.innerText = `Player two Wins!`
   } else {
-    return;
+    return
   }
 }
-
-
 
 function resetBoard() {
   for (let i = 0; i < gameArray.length; i++) {
