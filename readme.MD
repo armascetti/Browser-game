@@ -14,6 +14,6 @@
   # Add-ons 
 
   
-![Light Mode:](images/light mode.PNG)
+![Light Mode:](./images/light mode.PNG)
 
-![Dark Mode:](images/dark mode.PNG)
+![Dark Mode:](./images/dark mode.PNG)
