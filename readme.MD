@@ -12,14 +12,13 @@
   [Visit website] (https://https://fonts.google.com/)
 
   # Add-ons 
+![light mode](https://user-images.githubusercontent.com/89749759/138479439-72909397-21c6-4381-88e7-22719aced5d2.PNG)
 
-  
-![Light Mode](/images/light mode.PNG)
+ ![dark mode](https://user-images.githubusercontent.com/89749759/138479366-6b706508-b4bb-4451-a8da-cdc4b9a55f91.PNG)
 
-![Dark Mode](/images/dark mode.PNG)
 
-# Next Steps 
+# Stretch Goals 
 
 * Play against a computer 
 * More mobile friendly
-* Add more unique styling to the game 
+* Add more unique styling to the game
