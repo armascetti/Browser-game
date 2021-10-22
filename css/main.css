@@ -8,8 +8,9 @@
 }
 
 
+
 body{
-  background-color:lavenderblush;
+  background-color:thistle;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,6 +30,7 @@ h3{
   font-size: x-large;
   text-align: center;
   margin: 20px;
+  text-decoration-style: solid;
 }
 
    #Grid {
@@ -50,20 +52,14 @@ h3{
    border-radius: 95px;
   }
   
-  #dark-mode {
-    background-color: salmon;
+  #dark-mode,  #resetButton {
+    background-color:burlywood;
     height: 40px;
-    width: 80px;
-    border-radius: 20%;
+    width: 110px;
+    border-radius: 5%;
+    margin: 10px;
+    font-size: large;
   }
-
-  #resetButton {
-    background-color: salmon;
-    height: 40px;
-    width: 80px;
-    border-radius: 20%;
-  }
-
 
 
   .dark-mode {
@@ -81,22 +77,15 @@ h3{
 
   .dark-mode #resetButton {
     background-color:black;
-    color: white;
-    height: 40px;
-    width: 80px;
-    border-radius: 20%;
+    color: white;  
   }
 
   .dark-mode #dark-mode  {
     background-color: black;
-    color: white;
-    height: 40px;
-    width: 80px;
-    border-radius: 20%;
+    color: white;   
+    content: "Light-Mode";
   }
-  @media only screen and (min-width: 768px) {
-    .card{
-      width: 325px;
-      margin: 30px 15px 0;
-    }
+
+  #buttons{
+    display: flex;
   }

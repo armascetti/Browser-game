@@ -181,6 +181,7 @@ function checkWinningCombo(combo) {
 function displayWinner(counterPlayerOne, counterPlayerTwo) {
   if (counterPlayerOne === 4) {
     messageEl.innerText = `Player One Wins!`
+    animateCSS('#message', 'bounce');
   } else if (counterPlayerTwo === 4) {
     messageEl.innerText = `Player two Wins!`
   } else {
@@ -213,5 +214,3 @@ function toggleLightMode() {
 
 initializeBoard()
 renderBoardValues()
-
-
